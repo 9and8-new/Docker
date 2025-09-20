@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  jupyter:
+    image: jupyter/scipy-notebook:latest   # Jupyter + numpy/pandas/scipy/scikit-learn 포함 이미지
+    container_name: jupyter-notebook
+    ports:
+      - "9999:9999"                        # 호스트 9999 → 컨테이너 9999
+    volumes:
+      - ./notebooks:/home/jovyan/work      # 로컬 ./notebooks 폴더 → 컨테이너 work 폴더
+<:기준 좌측은 윈도우경로 우측은 리눅스 가상환경경로>
+    environment:
+      - JUPYTER_TOKEN=ml1234               # 접속 토큰 지정
+<접속할때 계정 = 패스워드 를입력해서 기본메인화면이 뜨게됨>
+    restart: unless-stopped
+
+cmd에서
+docker compose up으로 켜고 끌때는 무조껀 docker compose down을 해줘야 함.
+
+ctrl + c = stop,
+후 docker compose down으로 끄기.
+
+설정? 추가할땐 requirements에 추가해 넣으면 됨.
+
+폴더cmd에서 docker images 에서 확인후 docker ps 에 컨테이너 있는지확인, docker ps -a후 있으면
+docker rm 하고 -a에 있는 코드입력(docker rm af86c29aefd8)
+그후 docker 실행(docker compose up)

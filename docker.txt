@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  jupyter:
+    image: jupyter/scipy-notebook:latest   # Jupyter + numpy/pandas/scipy/scikit-learn 포함 이미지
+    container_name: jupyter-notebook
+    ports:
+      - "9999:9999"                        # 호스트 9999 → 컨테이너 9999
+    volumes:
+      - ./notebooks:/home/jovyan/work      # 로컬 ./notebooks 폴더 → 컨테이너 work 폴더
+<:기준 좌측은 윈도우경로 우측은 리눅스 가상환경경로>
+    environment:
+      - JUPYTER_TOKEN=ml1234               # 접속 토큰 지정
+<접속할때 계정 = 패스워드 를입력해서 기본메인화면이 뜨게됨>
+    restart: unless-stopped
+
+
